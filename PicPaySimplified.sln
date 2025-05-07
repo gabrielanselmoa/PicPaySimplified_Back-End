@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9A704DB2-0216-4914-80A1-13D51FA9EC07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicPaySimplified.Application", "src\PicPaySimplified.Application\PicPaySimplified.Application.csproj", "{E586C49A-4385-4749-8117-C845B03BCAAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicPaySimplified.Domain", "src\PicPaySimplified.Domain\PicPaySimplified.Domain.csproj", "{6EC03A56-809C-4DC6-9C79-C119ED9AA895}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicPaySimplified.Infrastructure", "src\PicPaySimplified.Infrastructure\PicPaySimplified.Infrastructure.csproj", "{2AC512DE-96DA-4C92-926D-C6CF4CCB10D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicPaySimplified.API", "src\PicPaySimplified.API\PicPaySimplified.API.csproj", "{B74FAF3A-4C3D-4D5D-8C96-3179D0B05391}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E586C49A-4385-4749-8117-C845B03BCAAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E586C49A-4385-4749-8117-C845B03BCAAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E586C49A-4385-4749-8117-C845B03BCAAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E586C49A-4385-4749-8117-C845B03BCAAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EC03A56-809C-4DC6-9C79-C119ED9AA895}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EC03A56-809C-4DC6-9C79-C119ED9AA895}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EC03A56-809C-4DC6-9C79-C119ED9AA895}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EC03A56-809C-4DC6-9C79-C119ED9AA895}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AC512DE-96DA-4C92-926D-C6CF4CCB10D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AC512DE-96DA-4C92-926D-C6CF4CCB10D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AC512DE-96DA-4C92-926D-C6CF4CCB10D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AC512DE-96DA-4C92-926D-C6CF4CCB10D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B74FAF3A-4C3D-4D5D-8C96-3179D0B05391}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B74FAF3A-4C3D-4D5D-8C96-3179D0B05391}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B74FAF3A-4C3D-4D5D-8C96-3179D0B05391}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B74FAF3A-4C3D-4D5D-8C96-3179D0B05391}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E586C49A-4385-4749-8117-C845B03BCAAD} = {9A704DB2-0216-4914-80A1-13D51FA9EC07}
+		{6EC03A56-809C-4DC6-9C79-C119ED9AA895} = {9A704DB2-0216-4914-80A1-13D51FA9EC07}
+		{2AC512DE-96DA-4C92-926D-C6CF4CCB10D9} = {9A704DB2-0216-4914-80A1-13D51FA9EC07}
+		{B74FAF3A-4C3D-4D5D-8C96-3179D0B05391} = {9A704DB2-0216-4914-80A1-13D51FA9EC07}
+	EndGlobalSection
+EndGlobal
