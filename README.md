@@ -1,138 +1,139 @@
-﻿# Backend PicPay Simplificado - Resumo
+# Simplified PicPay Backend - Summary
 
-Este projeto implementa o backend de uma versão simplificada do PicPay, focando nas funcionalidades de carteira digital e transferência entre usuários Comuns e Lojistas.
-A ideia aqui é ter um usuário logado (admin) que pode realizar e gerenciar as operações.
-## 🏗️ Arquitetura
+This project implements the backend for a simplified version of PicPay, focusing on digital wallet functionalities and transfers between Common and Merchant users.
 
-O projeto segue uma **Arquitetura de Monolito Modular**, organizando o código em módulos coesos (Domain, Application, Infrastructure, Rest) para facilitar a manutenção e o desacoplamento.
+**The idea here is to have a logged-in user (admin) who can perform and manage operations. After installing the project, register + login and enjoy the system's features 😊**
 
-## 💻 Tecnologias e Bibliotecas Principais
+## 🏗️ Architecture
 
-* **Linguagem:** C#
+The project follows a **Modular Monolith Architecture**, organizing the code into cohesive modules (Domain, Application, Infrastructure, Rest) to facilitate maintenance and decoupling.
+
+## 💻 Key Technologies and Libraries
+
+* **Language:** C#
 * **Framework:** .NET (ASP.NET Core)
-* **Banco de Dados:** MongoDB (NoSQL)
-* **ORM/Driver MongoDB:** Driver oficial do MongoDB para .NET
-* **Autenticação:** JWT (JSON Web Tokens)
-* **Documentação da API:** Swagger/OpenAPI (Swashbuckle)
-* **Mapeamento:** Manual ou com bibliotecas.
+* **Database:** MongoDB (NoSQL)
+* **ORM/MongoDB Driver:** Official MongoDB Driver for .NET
+* **Authentication:** JWT (JSON Web Tokens)
+* **API Documentation:** Swagger/OpenAPI (Swashbuckle)
+* **Mapping:** Manual or using libraries.
 * **Logging:** Microsoft.Extensions.Logging
 
-## ✨ Princípios e Padrões Aplicados
+## ✨ Applied Principles and Patterns
 
-* **SOLID:** Considerado na estrutura e implementação.
-* **Clean Code:** Foco em legibilidade e manutenibilidade.
-* **Clean Architecture:** Separação de camadas e dependências direcionadas ao domínio.
-* **Repository Pattern:** Abstração do acesso a dados (MongoDB).
-* **Service Pattern:** Lógica de negócio na camada de aplicação.
-* **DTO Pattern:** Transferência de dados entre camadas.
-* **Result Pattern:** Retorno consistente de operações.
+* **SOLID:** Considered in the structure and implementation.
+* **Clean Code:** Focus on readability and maintainability.
+* **Clean Architecture:** Separation of layers and dependencies directed towards the domain.
+* **Repository Pattern:** Abstraction of data access (MongoDB).
+* **Service Pattern:** Business logic in the application layer.
+* **DTO Pattern:** Data transfer between layers.
+* **Result Pattern:** Consistent operation return type.
 
-## 🔐 Autenticação
+## 🔐 Authentication
 
-Implementada via **JWT**. Tokens são gerados no login e usados para acessar endpoints protegidos.
+Implemented via **JWT**. Tokens are generated upon login and used to access protected endpoints.
 
-## 🗺️ Endpoints da API (Foco na Transferência)
+## 🗺️ API Endpoints (Transfer Focus)
 
-O endpoint principal para o desafio é:
+The main endpoint for the challenge is:
 
 ### `POST /payments`
 
-Processa o fluxo de transferência, requerendo `value`, `payer` (GUID) e `payee` (GUID) no corpo da requisição.
+Processes the transfer flow, requiring `value`, `payer` (GUID), and `payee` (GUID) in the request body.
 
-*Proposta alternativa:* `POST /payments/transfer` para melhor semântica.
+*Alternative Proposal:* `POST /payments/transfer` for better semantics.
 
-## 🌐 Serviços Externos
+## 🌐 External Services
 
-* **Serviço Autorizador:** Chamado via `GET` (`https://util.devi.tools/api/v2/authorize`) antes do débito.
-* **Serviço de Notificação:** Chamado via `POST` (`https://util.devi.tools/api/v1/notify`) de forma **assíncrona** após a transferência para notificar o recebedor, sem impactar o fluxo principal.
+* **Authorization Service:** Called via `GET` (`https://util.devi.tools/api/v2/authorize`) before debiting.
+* **Notification Service:** Called via `POST` (`https://util.devi.tools/api/v1/notify`) **asynchronously** after the transfer to notify the receiver, without impacting the main flow.
 
-## 🔄 Transacionalidade
+## 🔄 Transactionality
 
-A operação de transferência é **atômica**. As ações são revertidas em caso de falha para garantir a consistência do 
-saldo do pagador.
+The transfer operation is **atomic**. Actions are rolled back in case of failure to ensure the payer's balance consistency.
 
-## 📝 Tratamento de Erros e Logging
+## 📝 Error Handling and Logging
 
-Utiliza blocos `try-catch` e `ILogger` para registrar erros, exceções e o fluxo da aplicação.
+Uses `try-catch` blocks and `ILogger` to record errors, exceptions, and the application flow.
 
-## Guia de uso:
+## Usage Guide:
 
-Este guia resume os passos necessários para configurar e rodar o projeto Backend PicPay Simplificado.
+This guide summarizes the steps required to set up and run the Simplified PicPay Backend project.
 
-## 📋 Pré-requisitos
+## 📋 Prerequisites
 
-Certifique-se de ter o seguinte instalado:
+Make sure you have the following software installed on your system:
 
-* **SDK do .NET:** Versão compatível com o projeto (verifique o arquivo `.csproj`, geralmente .NET 6+).
-* **Docker:** Para rodar o banco de dados MongoDB.
-* **Git:** Para clonar o repositório.
+* **SDK do .NET:** Version compatible with the project (check the `.csproj` file, usually .NET 6+).
+* **Docker:** To run the MongoDB database.
+* **Git:** To clone the repository.
 
-## ⚙️ Configuração e Execução
+## ⚙️ Setup and Execution
 
-Siga estes passos para colocar a aplicação em funcionamento:
+Follow these steps to get the application up and running:
 
-1.  **Clone o Repositório:**
-    Abra o terminal e execute:
+1.  **Clone the Repository:**
+    Open your terminal and execute:
     ```bash
     git clone [https://github.com/gabrielanselmoa/PicPaySimplified.git](https://github.com/gabrielanselmoa/PicPaySimplified.git)
     cd PicPaySimplified
     ```
 
-2.  **Inicie o Banco de Dados (MongoDB com Docker):**
-    Execute o comando para iniciar um container MongoDB:
+2.  **Start the Database (MongoDB with Docker):**
+    Run the command to start a MongoDB container:
     ```bash
     docker run -d --name picpaysimplified-mongo -p 27017:27017 mongo:latest
     ```
-    Verifique se o container iniciou corretamente com `docker ps`.
+    Verify that the container started correctly with `docker ps`.
 
-3.  **Crie o Arquivo de Variáveis de Ambiente (`.env`):**
-    Na **raiz da solução** (`./PicPaySimplified`), crie um arquivo chamado `.env` e adicione as seguintes variáveis, substituindo os valores conforme necessário:
+3.  **Create the Environment Variables File (`.env`):**
+    In the **solution root** (`./PicPaySimplified`), create a new file named `.env` and add the following variables, replacing the values as needed:
     ```env
     CONNECTION_STRING=mongodb://localhost:27017
     DB_NAME=PicPaySimplifiedDB
-    JWT_SECRET=SuaChaveSuperSecretaParaJWTQueDeveSerLongaEDificil
-    ISSUER=SeuIssuerAqui (Ex: http://localhost:xxxx)
-    AUDIENCE=SuaAudienceAqui (Ex: http://localhost:xxxx)
+    JWT_SECRET=YourSuperSecretJWTKeyThatShouldBeLongAndDifficult
+    ISSUER=YourIssuerHere (Ex: http://localhost:xxxx)
+    AUDIENCE=YourAudienceHere (Ex: http://localhost:xxxx)
     ```
 
-4.  **Restaure as Dependências e Compile o Projeto:**
-    Na raiz da solução (`./PicPaySimplified`), execute o build do .NET:
+4.  **Restore Dependencies and Build the Project:**
+    Still in the solution root folder (`./PicPaySimplified`), execute the .NET build command:
     ```bash
     dotnet build
     ```
 
-5.  **Execute a Aplicação:**
-    Navegue até a pasta do projeto da API (geralmente `PicPaySimplified/PicPaySimplified.API`):
+5.  **Run the Application:**
+    Navigate to the API project folder (usually `PicPaySimplified/PicPaySimplified.API`):
     ```bash
     cd PicPaySimplified.API
     dotnet run
     ```
-    O terminal indicará os endereços (URLs) onde a aplicação está ouvindo.
+    The terminal will indicate the addresses (URLs) where the application is listening.
 
-6.  **Acesse a Documentação da API (Swagger):**
-    Com a aplicação rodando, abra seu navegador e acesse o Swagger UI em uma das URLs fornecidas pelo `dotnet run`, geralmente:
-    `https://localhost:7XXX/swagger` ou `http://localhost:5XXX/swagger` (substitua `7XXX` ou `5XXX` pela porta correta).
+6.  **Access the API Documentation (Swagger):**
+    With the application running, open your browser and navigate to the Swagger UI endpoint at one of the URLs provided by `dotnet run`, usually:
+    `https://localhost:7XXX/swagger` or `http://localhost:5XXX/swagger` (replace `7XXX` or `5XXX` with the correct port).
 
-## ⏹️ Parando os Serviços
+## ⏹️ Stopping the Services
 
-* **Aplicação .NET:** No terminal onde o `dotnet run` está ativo, pressione `Ctrl + C`.
-* **Container MongoDB:** Para parar o container Docker:
+* **`.NET` Application:** In the terminal where `dotnet run` is active, press `Ctrl + C`.
+* **MongoDB Container:** To stop the Docker MongoDB container:
     ```bash
     docker stop picpaysimplified-mongo
     ```
 
-## ✅ Análise de Valor e Pontos Fortes
+## ✅ Value Analysis and Strong Points
 
-A implementação deste projeto demonstra uma abordagem abrangente e um forte domínio sobre os pilares essenciais do desenvolvimento backend moderno. Consegui endereçar e aplicar com sucesso a vasta maioria dos critérios valorizados, entregando não apenas a funcionalidade requerida, mas um sistema construído com atenção à **qualidade, robustez e boas práticas**.
+The implementation of this project demonstrates a comprehensive approach and a strong command over the essential pillars of modern backend development. I successfully addressed and applied the vast majority of the valued criteria, delivering not just the required functionality, but a system built with attention to **quality, robustness, and best practices**.
 
-Os pontos fortes e as áreas onde houve aplicação e demonstração de conhecimento incluem:
+The strong points and areas where knowledge was applied and demonstrated include:
 
-* **Arquitetura Sólida e Desacoplamento:** Apliquei uma **Arquitetura Modular/Limpa**, pensando na estrutura antes de codificar e dedicando cuidado em **desacoplar componentes** entre camadas (Service, Repository, etc.), o que melhora significativamente a **Manutenibilidade do Código**.
-* **Aplicação de Design Patterns:** Utilizei **Design Patterns** relevantes (como Repository, Service, DTO e Result Pattern) para resolver problemas comuns de design e estruturar o código de forma eficaz.
-* **Infraestrutura e Ferramentas:** Demonstrei proficiência no **Uso de Docker** para gerenciar o ambiente de banco de dados, simplificando a configuração.
-* **Persistência e Modelagem:** Realizei a **Modelagem de Dados** adequada para o MongoDB, atendendo aos requisitos do negócio.
-* **Qualidade e Confiabilidade:** Implementei **Tratamento de Erros** consistente e busquei uma **cobertura de testes consistente** (cenários unitários/integração) para garantir a confiabilidade da aplicação.
-* **Segurança e Acessibilidade:** Tive **Cuidado com itens de segurança** básicos (como Autenticação JWT) e forneci **Documentação** clara (Swagger) para a API.
-* **Argumentação e Domínio Técnico:** Através das escolhas de arquitetura e implementação, estou apto a **argumentar minhas escolhas** e **apresentar soluções que domino**, demonstrando consistência no raciocínio técnico.
+* **Solid Architecture and Decoupling:** I applied a **Modular/Clean Architecture**, thinking about the structure before coding and dedicating care to **decoupling components** between layers (Service, Repository, etc.), which significantly improves **Code Maintainability**.
+* **Application of Design Patterns:** I utilized relevant **Design Patterns** (such as Repository, Service, DTO, and Result Pattern) to solve common design problems and structure the code effectively.
+* **Infrastructure and Tools:** I demonstrated proficiency in using **Docker** to manage the database environment, simplifying setup.
+* **Persistence and Modeling:** I performed appropriate **Data Modeling** for MongoDB, meeting the business requirements.
+* **Quality and Reliability:** I implemented consistent **Error Handling** and aimed for **consistent test coverage** (unit/integration scenarios) to ensure application reliability.
+* **Security and Accessibility:** I paid **Attention to basic security items** (like JWT Authentication) and provided clear **Documentation** (Swagger) for the API.
+* **Argumentation and Technical Proficiency:** Through the architectural and implementation choices, I am able to **argue my choices** and **present solutions I master**, demonstrating consistency in technical reasoning.
 
-Este conjunto de práticas e conceitos aplicados resultou em uma solução não apenas funcional, mas bem estruturada, testada (conforme mencionado), de fácil manutenção e alinhada com padrões da indústria, superando as expectativas de um projeto básico.
+This set of applied practices and concepts resulted in a solution that is not only functional but well-structured, tested (as mentioned), easily maintainable, and aligned with industry standards, exceeding the expectations of a basic project.
